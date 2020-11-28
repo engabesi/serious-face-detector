@@ -52,6 +52,10 @@ const calcExpressionPoint = (expression) => {
 
     const pictureCanvas = document.querySelector("canvas");
     const timestampLabel = document.querySelector("#timestamp");
+    const alertSE = document.querySelector("#alert");
+    document.querySelector(
+      "#alertSource"
+    ).src = `${gitPagesPath}/audio/warning.mp3`;
     setInterval(async () => {
       const results = await faceapi
         .detectAllFaces(
@@ -72,6 +76,7 @@ const calcExpressionPoint = (expression) => {
           seriousPoint = 0;
           seriousCount++;
           timestampLabel.textContent = `${seriousCount}回目 ${new Date()}`;
+          alertSE.play();
         }
       });
     }, 100);
