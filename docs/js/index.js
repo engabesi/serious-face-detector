@@ -19,6 +19,20 @@ const loadModels = async () => {
   ]);
 };
 
+const calcExpressionPoint = (expression) => {
+  switch (expression) {
+    case "neutral":
+      return 1;
+    case "angry":
+    case "disgusted":
+      return 2;
+    case "happy":
+      return -5;
+    default:
+      return 0;
+  }
+};
+
 (async () => {
   const video = document.querySelector("video");
   await loadModels();
@@ -31,6 +45,10 @@ const loadModels = async () => {
       // default 0.5
       scoreThreshold: 0.5,
     };
+
+    // 真顔ポイント
+    let seriousPoint = 0;
+
     setInterval(async () => {
       const results = await faceapi
         .detectAllFaces(
@@ -42,6 +60,11 @@ const loadModels = async () => {
       const resizedResults = faceapi.resizeResults(results, displaySize);
       resizedResults.forEach((result) => {
         const expression = result.expressions.asSortedArray()[0].expression;
+        seriousPoint += calcExpressionPoint(expression);
+        if (seriousPoint >= 100) {
+          // 画像出力
+          seriousPoint = 0;
+        }
       });
     }, 100);
   });
