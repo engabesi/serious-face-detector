@@ -15,14 +15,21 @@
         justify-content: center;
         align-items: center;
       }
-
+      .vertical {
+        display: flex;
+        flex-direction: column;
+      }
       canvas {
-        position: absolute;
+        border: 1px solid gray;
       }
     </style>
   </head>
   <body>
-    <video id="video" width="720" height="560" autoplay muted></video>
+    <video id="video" width="720" height="540" autoplay muted></video>
+    <div class="vertical">
+      <canvas id="picture" width="512" height="384"></canvas>
+      <label id="timestamp"></label>
+    </div>
     <script defer src="js/index.js"></script>
   </body>
 </html>

@@ -48,7 +48,10 @@ const calcExpressionPoint = (expression) => {
 
     // 真顔ポイント
     let seriousPoint = 0;
+    let seriousCount = 0;
 
+    const pictureCanvas = document.querySelector("canvas");
+    const timestampLabel = document.querySelector("#timestamp");
     setInterval(async () => {
       const results = await faceapi
         .detectAllFaces(
@@ -63,7 +66,12 @@ const calcExpressionPoint = (expression) => {
         seriousPoint += calcExpressionPoint(expression);
         if (seriousPoint >= 100) {
           // 画像出力
+          pictureCanvas
+            .getContext("2d")
+            .drawImage(video, 0, 0, pictureCanvas.width, pictureCanvas.height);
           seriousPoint = 0;
+          seriousCount++;
+          timestampLabel.textContent = `${seriousCount}回目 ${new Date()}`;
         }
       });
     }, 100);
