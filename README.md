@@ -13,7 +13,7 @@ enable hardware acceleration in browser
 
 1. `git clone`
 2. `yarn`
-3. switch `const gitPagesPath = ""` of `index.js` to `const gitPagesPath = "/true-face-detector"`
+3. switch `const gitPagesPath = ""` of `index.js` to `const gitPagesPath = "/serious-face-detector"`
 4. `yarn start`
 5. open http://localhost:8080/ in browser
 
